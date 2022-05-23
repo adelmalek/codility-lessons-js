@@ -10,22 +10,20 @@ the function should return 4.
 */
 
 function solution(A) {
+    let N = A.length;
+    let result = 0;
+
     A.sort( (a, b) => a - b);
-    let sumOfTriplets = 0;
 
-    for (let i = 0; i < A.length-2; i++) {
-        let plus = i + 1;
-        let lessThan = i + 2;
-
-        while (plus < A.length - 1) {
-            if (lessThan < A.length && A[i] + A[plus] > A[lessThan]) {
-                lessThan++
-            } else {
-                plus++;
-                sumOfTriplets += lessThan - plus
+    for (let i = 0; i < N; i++) {
+        let x = i + 2;
+        for (let j = i+1; j < N; j++) {
+            while (x < N && A[i] + A[j] > A[x] ) {
+                x += 1
             }
+            result += x - j - 1;
         }
     };
 
-    return sumOfTriplets;
+    return result;
 };
